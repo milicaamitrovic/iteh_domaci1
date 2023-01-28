@@ -168,7 +168,11 @@
             return false;
         }
 
-
+        if(!/^([^0-9]*)$/.test(naziv) || !/^([^@#$%^&*.,<>'";:?]*)$/.test(naziv)) {
+            alert("Naziv vrste plesa ne sme sadrzati cifre i specijalne karaktere!");
+            return false;
+        }
+        
         const koreograf = $('#koreograf').val();
         $.post('../vrsta_plesaHandlers/update.php', { id: trenutniId, naziv: naziv, koreograf: koreograf }, function (data) {
           console.log(data);
@@ -210,6 +214,15 @@
             return false;
         }
 
+        if(!/^([^0-9]*)$/.test(naziv) || !/^([^@#$%^&*.,<>'";:?]*)$/.test(naziv)) {
+            alert("Naziv vrste plesa ne sme sadrzati cifre i specijalne karaktere!");
+            return false;
+        }
+
+        if(vrste_plesova.find(x=>x.naziv.toUpperCase()==naziv.toUpperCase())){
+            alert("Vrsta plesa sa datim nazivom vec postoji!");
+            return false;
+        }
         else {
             const koreograf = $('#koreograf_dodaj').val();
             $.post('../vrsta_plesaHandlers/add.php', { naziv: naziv, koreograf: koreograf }, function (data) {
