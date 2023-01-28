@@ -127,7 +127,21 @@
           return false;
         }
 
-        
+        if(!/^([^0-9]*)$/.test(polaznik) || !/^([^@#$%^&*.,<>'";:?]*)$/.test(polaznik)) {
+            alert("Ime polaznika ne sme sadržati cifre i specijalne karaktere!");
+            return false;
+        }
+
+        if(!/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.test(datum)) {
+            alert("Datum mora biti u formatu  YYYY-MM-DD!");
+            return false;
+        }
+
+        if(!/^[0-9]*$/.test(prostorija)) {
+            alert("Broj prostorije moze sadrzati samo cifre!");
+            return false;
+        }
+
         if (trenutniTerminId == -1) {
           $.post('../terminHandlers/add.php', { polaznik: polaznik, datum: datum, prostorija: prostorija, vrsta_plesa: vrsta_plesa.id }, function (data) {
             vratiTermine();
